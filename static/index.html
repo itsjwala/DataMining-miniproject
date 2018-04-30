@@ -1,0 +1,271 @@
+<!doctype html>
+
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="description" content="A front-end template that helps you build fast, modern mobile web apps.">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, minimum-scale=1.0">
+    <title>Material Design Lite</title>
+
+    <!-- Add to homescreen for Chrome on Android -->
+    <meta name="mobile-web-app-capable" content="yes">
+    <link rel="icon" sizes="192x192" href="static/images/android-desktop.png">
+
+    <!--bootstrap -->
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+  <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+
+    <!-- Add to homescreen for Safari on iOS -->
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-status-bar-style" content="black">
+    <meta name="apple-mobile-web-app-title" content="Material Design Lite">
+    <link rel="apple-touch-icon-precomposed" href="static/images/ios-desktop.png">
+
+    <!-- Tile icon for Win8 (144x144 + tile color) -->
+    <meta name="msapplication-TileImage" content="static/images/touch/ms-touch-icon-144x144-precomposed.png">
+    <meta name="msapplication-TileColor" content="#3372DF">
+
+    <link rel="shortcut icon" href="static/images/favicon.png">
+
+    <!-- SEO: If your mobile URL is different from the desktop URL, add a canonical link to the desktop page https://developers.google.com/webmasters/smartphone-sites/feature-phones -->
+    <!--
+    <link rel="canonical" href="http://www.example.com/">
+    -->
+
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Roboto:regular,bold,italic,thin,light,bolditalic,black,medium&amp;lang=en">
+    <link rel="stylesheet" href="https://fonts.googleapis.com/icon?family=Material+Icons">
+    <link rel="stylesheet" href="https://code.getmdl.io/1.3.0/material.deep_purple-pink.min.css">
+    <link rel="stylesheet" href="static/css/styles.css">
+    <style>
+    #view-source {
+      position: fixed;
+      display: block;
+      right: 0;
+      bottom: 0;
+      margin-right: 40px;
+      margin-bottom: 40px;
+      z-index: 900;
+    }
+    </style>
+  </head>
+
+  <body class="mdl-demo mdl-color--grey-100 mdl-color-text--grey-700 mdl-base">
+    <div class="mdl-layout mdl-js-layout mdl-layout--fixed-header">
+
+      <header class="mdl-layout__header mdl-layout__header--scroll mdl-color--primary">
+        <div class="mdl-layout--large-screen-only mdl-layout__header-row">
+        </div>
+        <div class="mdl-layout--large-screen-only mdl-layout__header-row">
+          <h3>Customer Pull by Target Ads</h3>
+        </div>
+        <div class="mdl-layout--large-screen-only mdl-layout__header-row">
+        </div>
+        <div class="mdl-layout__tab-bar mdl-js-ripple-effect mdl-color--primary-dark">
+          <a href="#overview" class="mdl-layout__tab is-active">Predict</a>
+          <a href="#features" class="mdl-layout__tab">Naive Bayesian</a>
+          <a href="#features" class="mdl-layout__tab">Random Forest</a>
+          <a href="#features" class="mdl-layout__tab">K-nn</a>
+          <a href="#features" class="mdl-layout__tab">Decision Tree</a>
+          <button class="mdl-button mdl-js-button mdl-button--fab mdl-js-ripple-effect mdl-button--colored mdl-shadow--4dp mdl-color--accent" id="add">
+            <i class="material-icons" role="presentation">add</i>
+            <span class="visuallyhidden">Add</span>
+          </button>
+        </div>
+      </header>
+
+      <main class="mdl-layout__content">
+
+        <div class="mdl-layout__tab-panel is-active" id="overview">
+
+
+          <section class="section--center mdl-grid mdl-grid--no-spacing mdl-shadow--2dp">
+            <div class="mdl-card mdl-cell mdl-cell--12-col">
+              <div class="mdl-card__supporting-text">
+                <center><h4>Know Your Customer</h4></center>
+                <form>
+                  <div class="form-group">
+                    <label for="gender">Gender</label> <br>
+                    <label class="radio-inline">
+                      <input type="radio" id="gender" name="gender" value="male">Male
+                    </label>
+                    <label class="radio-inline">
+                      <input type="radio" id="gender" name="gender" value="female">Female
+                    </label>
+                  </div>
+
+
+                  <div class="form-group">
+                    <label for="age">Age</label> <br>
+                    <div class="slidecontainer">
+                      <input type="range" name="age" min="18" max="100" value="30" class="slider" id="age">
+                      <p>age: <span id="demo"></span></p>
+                    </div>
+                    <script>
+                    var slider = document.getElementById("age");
+                    var output = document.getElementById("demo");
+                    output.innerHTML = slider.value;
+
+                    slider.oninput = function() {
+                      output.innerHTML = this.value;
+                    }
+                    </script>
+                  </div>
+
+                  <div class="form-group">
+                    <label for="salary">Salary</label>
+                    <input type="text" name="salary" onkeypress='validate(event)' class="form-control" id="salary" placeholder="salary here">
+                    <script>
+                    function validate(evt) {
+                        var theEvent = evt || window.event;
+                        var key = theEvent.keyCode || theEvent.which;
+                        key = String.fromCharCode( key );
+                        var regex = /[0-9]|\./;
+                        if( !regex.test(key) ) {
+                          theEvent.returnValue = false;
+                          if(theEvent.preventDefault) theEvent.preventDefault();
+                        }
+                      }
+                    </script>
+                  </div>
+
+
+                  <div class="form-check" style="margin-top: 10px;margin-bottom: 10px;">
+                    <input type="checkbox" class="form-check-input" id="exampleCheck1">
+                    <label class="form-check-label" for="exampleCheck1">Check me out</label>
+                  </div>
+
+                  <button type="submit" onclick="showResult();" class="btn btn-primary">Submit</button>
+                </form>
+
+              </div>
+              <div class="mdl-card__actions" >
+                <button type="button" onclick="showResult();" class="btn btn-info">         Read our features
+                 </button>
+              </div>
+              <div id="result_here" class="mdl-card__actions" style="display: none;">
+                <a href="#" class="mdl-button">Read our features</a>
+              </div>
+              <script type="text/javascript">
+                function showResult()
+                {
+                  var rs=document.getElementById('result_here');
+                  rs.style.display = "block";
+                }
+              </script>
+            </div>
+          </section>
+
+        </div>
+
+
+        <div class="mdl-layout__tab-panel" id="features">
+          <section class="section--center mdl-grid mdl-grid--no-spacing">
+            <div class="mdl-cell mdl-cell--12-col">
+              <h4>Naive Bayes Classifier</h4>
+             Na¨ıve Bayesian classifiers assume that the effect of an attribute value on a given class
+              is independent of the values of the other attributes. This assumption is called classconditional
+              independence. It is made to simplify the computations involved and, in this
+              sense, is considered “na¨ıve.”
+              <ul class="toc">
+                <h4>Contents</h4>
+                <a href="#lorem1">Bayes’ Theorem</a>
+                <a href="#lorem2">Lorem ipsum</a>
+                <a href="#lorem3">Lorem ipsum</a>
+                <a href="#lorem4">Lorem ipsum</a>
+                <a href="#lorem5">Lorem ipsum</a>
+              </ul>
+
+              <h5 id="lorem1">Lorem ipsum dolor sit amet</h5>
+              <p>
+                Sit qui est voluptate proident minim cillum in aliquip cupidatat labore
+              </p>
+              <p>
+                Sunt qui ex incididunt sit anim incididunt sit elit ad officia id.
+              </p>
+
+              <h5 id="lorem2">Lorem ipsum dolor sit amet</h5>
+              <p>
+               aliqua tempor cupidatat aute dolore deserunt ipsum qui incididunt aliqua occaecat sit quis. Culpa sint aliqua aliqua reprehenderit veniam irure fugiat ea ad.
+              </p>
+              <p>
+                Non dolore sit nostrud eu ad excepteur cillum eu ex Lorem duis.
+              </p>
+              <p>
+                veniam ad ipsum eu. Ipsum culpa dolore sunt officia laborum quis.
+              </p>
+
+              <h5 id="lorem3">Lorem ipsum dolor sit amet</h5>
+
+              <p id="lorem4">
+                 sint elit aliqua anim dolore cupidatat fugiat aliquip qui.
+              </p>
+              <p id="lorem5">
+                ex cupidatat cupidatat nostrud nostrud ipsum.
+              </p>
+              <p>
+                 enim labore reprehenderit officia mollit.
+              </p>
+              <p>
+                 Aliquip mollit laboris ad labore anim.
+              </p>
+            </div>
+          </section>
+        </div>
+
+
+
+
+        <footer class="mdl-mega-footer">
+          <div class="mdl-mega-footer--middle-section">
+            <div class="mdl-mega-footer--drop-down-section">
+              <input class="mdl-mega-footer--heading-checkbox" type="checkbox" checked>
+              <h1 class="mdl-mega-footer--heading">Customer Pull by Target Ads</h1>
+            </div>
+            <div class="mdl-mega-footer--drop-down-section">
+              <input class="mdl-mega-footer--heading-checkbox" type="checkbox" checked>
+              <h1 class="mdl-mega-footer--heading">Data Mining</h1>
+              <h1 class="mdl-mega-footer--heading">Batch A3</h1>
+              <h1 class="mdl-mega-footer--heading">Group : 03</h1>
+            </div>
+            <div class="mdl-mega-footer--drop-down-section">
+              <input class="mdl-mega-footer--heading-checkbox" type="checkbox" checked>
+              <h1 class="mdl-mega-footer--heading"></h1>
+              <table style="text-align: left;" class="mdl-mega-footer--link-list">
+                <tr>
+                  <th>Onkar Pande </th>
+                  <th>(1514098)</th>
+                </tr>
+                <tr>
+                  <th>Rahul Soni</th>
+                  <th>(1514---)</th>
+                </tr>
+                <tr>
+                  <th>Jigar Wala</th>
+                  <th>(1514125)</th>
+                </tr>
+                <tr>
+                  <th>Arvind Ganesh</th>
+                  <th>(1514126)</th>
+                </tr>
+              </table>
+            </div>
+            <div class="mdl-mega-footer--drop-down-section">
+              <input class="mdl-mega-footer--heading-checkbox" type="checkbox" checked>
+              <h1 class="mdl-mega-footer--heading">FAQ</h1>
+              <ul class="mdl-mega-footer--link-list">
+                <li><a href="#">Questions</a></li>
+                <li><a href="#">Answers</a></li>
+                <li><a href="#">Contact us</a></li>
+              </ul>
+            </div>
+          </div>
+          </div>
+        </footer>
+      </main>
+    </div>
+    <script src="https://code.getmdl.io/1.3.0/material.min.js"></script>
+    <script src="static/js/index.js"></script>
+  </body>
+</html>
