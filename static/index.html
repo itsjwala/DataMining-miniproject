@@ -64,10 +64,10 @@
         </div>
         <div class="mdl-layout__tab-bar mdl-js-ripple-effect mdl-color--primary-dark">
           <a href="#overview" class="mdl-layout__tab is-active">Predict</a>
-          <a href="#features" class="mdl-layout__tab">Naive Bayesian</a>
-          <a href="#features" class="mdl-layout__tab">Random Forest</a>
-          <a href="#features" class="mdl-layout__tab">K-nn</a>
-          <a href="#features" class="mdl-layout__tab">Decision Tree</a>
+          <a href="#features1" class="mdl-layout__tab">Naive Bayesian</a>
+          <a href="#features2" class="mdl-layout__tab">Random Forest</a>
+          <a href="#features3" class="mdl-layout__tab">K-nn</a>
+          <a href="#features4" class="mdl-layout__tab">Decision Tree</a>
           <button class="mdl-button mdl-js-button mdl-button--fab mdl-js-ripple-effect mdl-button--colored mdl-shadow--4dp mdl-color--accent" id="add">
             <i class="material-icons" role="presentation">add</i>
             <span class="visuallyhidden">Add</span>
@@ -115,7 +115,7 @@
 
                   <div class="form-group">
                     <label for="salary">Salary</label>
-                    <input type="text" name="salary" onkeypress='validate(event)' class="form-control" id="salary" placeholder="salary here">
+                    <input type="text" name="salary" value="0" onkeypress='validate(event)' class="form-control" id="salary" placeholder="salary here">
                     <script>
                     function validate(evt) {
                         var theEvent = evt || window.event;
@@ -130,89 +130,253 @@
                     </script>
                   </div>
 
-
-                  <div class="form-check" style="margin-top: 10px;margin-bottom: 10px;">
-                    <input type="checkbox" class="form-check-input" id="exampleCheck1">
-                    <label class="form-check-label" for="exampleCheck1">Check me out</label>
+                  <div class="form-group">
+                    <label for="exampleFormControlSelect1">Select Algorithm</label>
+                    <select name="algo" class="form-control" id="algo">
+                      <option value="randForest">Random Forest</option>
+                      <option value="naiveBayes">Naive Bayes</option>
+                      <option value="knn">K nearest Neighbours</option>
+                      <option value="decisionTree">Decision Tree</option>
+                    </select>
                   </div>
 
-                  <button type="submit" onclick="showResult();" class="btn btn-primary">Submit</button>
+                  <button id="submit" class="btn btn-primary">Predict</button>
                 </form>
 
               </div>
-              <div class="mdl-card__actions" >
-                <button type="button" onclick="showResult();" class="btn btn-info">         Read our features
-                 </button>
-              </div>
-              <div id="result_here" class="mdl-card__actions" style="display: none;">
-                <a href="#" class="mdl-button">Read our features</a>
-              </div>
-              <script type="text/javascript">
-                function showResult()
-                {
-                  var rs=document.getElementById('result_here');
-                  rs.style.display = "block";
-                }
-              </script>
+
             </div>
+              <div class="container" id="output">
+
+              </div>
           </section>
+      </div>
 
-        </div>
 
 
-        <div class="mdl-layout__tab-panel" id="features">
+<!-- feature1 -->
+        <div class="mdl-layout__tab-panel" id="features1">
           <section class="section--center mdl-grid mdl-grid--no-spacing">
             <div class="mdl-cell mdl-cell--12-col">
               <h4>Naive Bayes Classifier</h4>
-             Na¨ıve Bayesian classifiers assume that the effect of an attribute value on a given class
-              is independent of the values of the other attributes. This assumption is called classconditional
-              independence. It is made to simplify the computations involved and, in this
-              sense, is considered “na¨ıve.”
+              <p>
+                Na¨ıve Bayesian classifiers assume that the effect of an attribute value on a given class is independent of the values of the other attributes. This assumption is called classconditional independence. It is made to simplify the computations involved and, in this sense, is considered “na¨ıve.”
+              </p>
               <ul class="toc">
                 <h4>Contents</h4>
                 <a href="#lorem1">Bayes’ Theorem</a>
-                <a href="#lorem2">Lorem ipsum</a>
-                <a href="#lorem3">Lorem ipsum</a>
-                <a href="#lorem4">Lorem ipsum</a>
-                <a href="#lorem5">Lorem ipsum</a>
+                <a href="#lorem2">Relation to our problem defination</a>
+                <a href="#lorem3">Confusion Matrix</a>
+                <a href="#lorem4">Graph for Testing Dataset</a>
               </ul>
 
-              <h5 id="lorem1">Lorem ipsum dolor sit amet</h5>
+              <h5 id="lorem1">Bayes’ Theorem</h5>
               <p>
-                Sit qui est voluptate proident minim cillum in aliquip cupidatat labore
-              </p>
-              <p>
-                Sunt qui ex incididunt sit anim incididunt sit elit ad officia id.
+
+              <div class="section-container"><p><strong>Bayes' theorem</strong> is a formula that describes how to update the probabilities of hypotheses when given evidence. It follows simply from the axioms of <a href="/wiki/conditional-probability-distribution/" class="wiki_link" title="conditional probability"  >conditional probability</a>, but can be used to powerfully reason about a wide range of problems involving belief updates. </p>
+
+<p>Given a hypothesis <span class="latexprocessor-inline latexprocessor-7a4b18a9e2eb2aef919d41631391b410314f3b053943e52fefb6bcc4f27e9ebc" title="LaTeX: \(H\)"><svg xmlns:xlink="http://www.w3.org/1999/xlink" style="width: 2.111ex; height: 1.667ex; vertical-align: -0.111ex; margin-top: 1px; margin-right: 0px; margin-bottom: 1px; margin-left: 0px; " viewBox="0 -703.9033013280564 888 724.8066026561128"><defs id="MathJax_SVG_glyphs-30b93d74264011e389b940400601ade9930561e0cf544e1db5dd8fe533930b09"><path id="MJMATHI-48-30b93d74264011e389b940400601ade9930561e0cf544e1db5dd8fe533930b09" stroke-width="0" d="M228 637Q194 637 192 641Q191 643 191 649Q191 673 202 682Q204 683 219 683Q260 681 355 681Q389 681 418 681T463 682T483 682Q499 682 499 672Q499 670 497 658Q492 641 487 638H485Q483 638 480 638T473 638T464 637T455 637Q416 636 405 634T387 623Q384 619 355 500Q348 474 340 442T328 395L324 380Q324 378 469 378H614L615 381Q615 384 646 504Q674 619 674 627T617 637Q594 637 587 639T580 648Q580 650 582 660Q586 677 588 679T604 682Q609 682 646 681T740 680Q802 680 835 681T871 682Q888 682 888 672Q888 645 876 638H874Q872 638 869 638T862 638T853 637T844 637Q805 636 794 634T776 623Q773 618 704 340T634 58Q634 51 638 51Q646 48 692 46H723Q729 38 729 37T726 19Q722 6 716 0H701Q664 2 567 2Q533 2 504 2T458 2T437 1Q420 1 420 10Q420 15 423 24Q428 43 433 45Q437 46 448 46H454Q481 46 514 49Q520 50 522 50T528 55T534 64T540 82T547 110T558 153Q565 181 569 198Q602 330 602 331T457 332H312L279 197Q245 63 245 58Q245 51 253 49T303 46H334Q340 38 340 37T337 19Q333 6 327 0H312Q275 2 178 2Q144 2 115 2T69 2T48 1Q31 1 31 10Q31 12 34 24Q39 43 44 45Q48 46 59 46H65Q92 46 125 49Q139 52 144 61Q147 65 216 339T285 628Q285 635 228 637Z"></path></defs><g stroke="black" fill="black" stroke-width="0" transform="matrix(1 0 0 -1 0 0)"><use xlink:href="#MJMATHI-48-30b93d74264011e389b940400601ade9930561e0cf544e1db5dd8fe533930b09"></use></g></svg></span> and evidence <span class="latexprocessor-inline latexprocessor-3ecd3810a6b0acd870f5e6bd7e0683985209fb6b59bdd43e01d883da3920118d" title="LaTeX: \(E\)"><svg xmlns:xlink="http://www.w3.org/1999/xlink" style="width: 1.778ex; height: 1.667ex; vertical-align: -0.111ex; margin-top: 1px; margin-right: 0px; margin-bottom: 1px; margin-left: 0px; " viewBox="0 -700.9033013280564 764 721.8066026561128"><defs id="MathJax_SVG_glyphs-7c66ebb8261311e3937340400601ade9b69a1ade077541ed99f302cfbb659c15"><path id="MJMATHI-45-7c66ebb8261311e3937340400601ade9b69a1ade077541ed99f302cfbb659c15" stroke-width="0" d="M492 213Q472 213 472 226Q472 230 477 250T482 285Q482 316 461 323T364 330H312Q311 328 277 192T243 52Q243 48 254 48T334 46Q428 46 458 48T518 61Q567 77 599 117T670 248Q680 270 683 272Q690 274 698 274Q718 274 718 261Q613 7 608 2Q605 0 322 0H133Q31 0 31 11Q31 13 34 25Q38 41 42 43T65 46Q92 46 125 49Q139 52 144 61Q146 66 215 342T285 622Q285 629 281 629Q273 632 228 634H197Q191 640 191 642T193 659Q197 676 203 680H757Q764 676 764 669Q764 664 751 557T737 447Q735 440 717 440H705Q698 445 698 453L701 476Q704 500 704 528Q704 558 697 578T678 609T643 625T596 632T532 634H485Q397 633 392 631Q388 629 386 622Q385 619 355 499T324 377Q347 376 372 376H398Q464 376 489 391T534 472Q538 488 540 490T557 493Q562 493 565 493T570 492T572 491T574 487T577 483L544 351Q511 218 508 216Q505 213 492 213Z"></path></defs><g stroke="black" fill="black" stroke-width="0" transform="matrix(1 0 0 -1 0 0)"><use xlink:href="#MJMATHI-45-7c66ebb8261311e3937340400601ade9b69a1ade077541ed99f302cfbb659c15"></use></g></svg></span>, Bayes' theorem states that the relationship between the probability of the hypothesis before getting the evidence <span class="latexprocessor-inline latexprocessor-a68b2458eb21ab1d69f27021caa7f7b053251c714e849a54be658528e9cc3dbf" title="LaTeX: \(P(H)\)"><svg xmlns:xlink="http://www.w3.org/1999/xlink" style="width: 5.667ex; height: 2.444ex; vertical-align: -0.778ex; margin-top: 1px; margin-right: 0px; margin-bottom: 1px; margin-left: 0px; " viewBox="0 -770.9033013280564 2417 1041.8066026561128"><defs><path id="MJMATHI-50-9455286cbed711e482c9026e3951ed912152172c8687419fb7abdce86e46d8df" stroke-width="0" d="M287 628Q287 635 230 637Q206 637 199 638T192 648Q192 649 194 659Q200 679 203 681T397 683Q587 682 600 680Q664 669 707 631T751 530Q751 453 685 389Q616 321 507 303Q500 302 402 301H307L277 182Q247 66 247 59Q247 55 248 54T255 50T272 48T305 46H336Q342 37 342 35Q342 19 335 5Q330 0 319 0Q316 0 282 1T182 2Q120 2 87 2T51 1Q33 1 33 11Q33 13 36 25Q40 41 44 43T67 46Q94 46 127 49Q141 52 146 61Q149 65 218 339T287 628ZM645 554Q645 567 643 575T634 597T609 619T560 635Q553 636 480 637Q463 637 445 637T416 636T404 636Q391 635 386 627Q384 621 367 550T332 412T314 344Q314 342 395 342H407H430Q542 342 590 392Q617 419 631 471T645 554Z"></path><path id="MJMAIN-28-9455286cbed711e482c9026e3951ed912152172c8687419fb7abdce86e46d8df" stroke-width="0" d="M94 250Q94 319 104 381T127 488T164 576T202 643T244 695T277 729T302 750H315H319Q333 750 333 741Q333 738 316 720T275 667T226 581T184 443T167 250T184 58T225 -81T274 -167T316 -220T333 -241Q333 -250 318 -250H315H302L274 -226Q180 -141 137 -14T94 250Z"></path><path id="MJMATHI-48-9455286cbed711e482c9026e3951ed912152172c8687419fb7abdce86e46d8df" stroke-width="0" d="M228 637Q194 637 192 641Q191 643 191 649Q191 673 202 682Q204 683 219 683Q260 681 355 681Q389 681 418 681T463 682T483 682Q499 682 499 672Q499 670 497 658Q492 641 487 638H485Q483 638 480 638T473 638T464 637T455 637Q416 636 405 634T387 623Q384 619 355 500Q348 474 340 442T328 395L324 380Q324 378 469 378H614L615 381Q615 384 646 504Q674 619 674 627T617 637Q594 637 587 639T580 648Q580 650 582 660Q586 677 588 679T604 682Q609 682 646 681T740 680Q802 680 835 681T871 682Q888 682 888 672Q888 645 876 638H874Q872 638 869 638T862 638T853 637T844 637Q805 636 794 634T776 623Q773 618 704 340T634 58Q634 51 638 51Q646 48 692 46H723Q729 38 729 37T726 19Q722 6 716 0H701Q664 2 567 2Q533 2 504 2T458 2T437 1Q420 1 420 10Q420 15 423 24Q428 43 433 45Q437 46 448 46H454Q481 46 514 49Q520 50 522 50T528 55T534 64T540 82T547 110T558 153Q565 181 569 198Q602 330 602 331T457 332H312L279 197Q245 63 245 58Q245 51 253 49T303 46H334Q340 38 340 37T337 19Q333 6 327 0H312Q275 2 178 2Q144 2 115 2T69 2T48 1Q31 1 31 10Q31 12 34 24Q39 43 44 45Q48 46 59 46H65Q92 46 125 49Q139 52 144 61Q147 65 216 339T285 628Q285 635 228 637Z"></path><path id="MJMAIN-29-9455286cbed711e482c9026e3951ed912152172c8687419fb7abdce86e46d8df" stroke-width="0" d="M60 749L64 750Q69 750 74 750H86L114 726Q208 641 251 514T294 250Q294 182 284 119T261 12T224 -76T186 -143T145 -194T113 -227T90 -246Q87 -249 86 -250H74Q66 -250 63 -250T58 -247T55 -238Q56 -237 66 -225Q221 -64 221 250T66 725Q56 737 55 738Q55 746 60 749Z"></path></defs><g stroke="black" fill="black" stroke-width="0" transform="matrix(1 0 0 -1 0 0)"><use xlink:href="#MJMATHI-50-9455286cbed711e482c9026e3951ed912152172c8687419fb7abdce86e46d8df"></use><use xlink:href="#MJMAIN-28-9455286cbed711e482c9026e3951ed912152172c8687419fb7abdce86e46d8df" x="751" y="0"></use><use xlink:href="#MJMATHI-48-9455286cbed711e482c9026e3951ed912152172c8687419fb7abdce86e46d8df" x="1140" y="0"></use><use xlink:href="#MJMAIN-29-9455286cbed711e482c9026e3951ed912152172c8687419fb7abdce86e46d8df" x="2028" y="0"></use></g></svg></span> and the probability of the hypothesis after getting the evidence <span class="latexprocessor-inline latexprocessor-e3f36ebb43d418d531959fcd4ddeb20f16fe58322672a4a158d7156f648e4068" title="LaTeX: \(P(H \mid E)\)"><svg xmlns:xlink="http://www.w3.org/1999/xlink" style="width: 9.375ex; height: 2.375ex; vertical-align: -0.75ex; margin-top: 1px; margin-right: 0px; margin-bottom: 1px; margin-left: 0px; " viewBox="0 -768.5807122916057 4014.5555555555557 1037.1614245832113"><defs><path id="MJMATHI-50-07516fd6de2d11e5baf802f5dad986b7ed19ae74990446b490f42ba80d84ea77" stroke-width="0" d="M287 628Q287 635 230 637Q206 637 199 638T192 648Q192 649 194 659Q200 679 203 681T397 683Q587 682 600 680Q664 669 707 631T751 530Q751 453 685 389Q616 321 507 303Q500 302 402 301H307L277 182Q247 66 247 59Q247 55 248 54T255 50T272 48T305 46H336Q342 37 342 35Q342 19 335 5Q330 0 319 0Q316 0 282 1T182 2Q120 2 87 2T51 1Q33 1 33 11Q33 13 36 25Q40 41 44 43T67 46Q94 46 127 49Q141 52 146 61Q149 65 218 339T287 628ZM645 554Q645 567 643 575T634 597T609 619T560 635Q553 636 480 637Q463 637 445 637T416 636T404 636Q391 635 386 627Q384 621 367 550T332 412T314 344Q314 342 395 342H407H430Q542 342 590 392Q617 419 631 471T645 554Z"></path><path id="MJMAIN-28-07516fd6de2d11e5baf802f5dad986b7ed19ae74990446b490f42ba80d84ea77" stroke-width="0" d="M94 250Q94 319 104 381T127 488T164 576T202 643T244 695T277 729T302 750H315H319Q333 750 333 741Q333 738 316 720T275 667T226 581T184 443T167 250T184 58T225 -81T274 -167T316 -220T333 -241Q333 -250 318 -250H315H302L274 -226Q180 -141 137 -14T94 250Z"></path><path id="MJMATHI-48-07516fd6de2d11e5baf802f5dad986b7ed19ae74990446b490f42ba80d84ea77" stroke-width="0" d="M228 637Q194 637 192 641Q191 643 191 649Q191 673 202 682Q204 683 219 683Q260 681 355 681Q389 681 418 681T463 682T483 682Q499 682 499 672Q499 670 497 658Q492 641 487 638H485Q483 638 480 638T473 638T464 637T455 637Q416 636 405 634T387 623Q384 619 355 500Q348 474 340 442T328 395L324 380Q324 378 469 378H614L615 381Q615 384 646 504Q674 619 674 627T617 637Q594 637 587 639T580 648Q580 650 582 660Q586 677 588 679T604 682Q609 682 646 681T740 680Q802 680 835 681T871 682Q888 682 888 672Q888 645 876 638H874Q872 638 869 638T862 638T853 637T844 637Q805 636 794 634T776 623Q773 618 704 340T634 58Q634 51 638 51Q646 48 692 46H723Q729 38 729 37T726 19Q722 6 716 0H701Q664 2 567 2Q533 2 504 2T458 2T437 1Q420 1 420 10Q420 15 423 24Q428 43 433 45Q437 46 448 46H454Q481 46 514 49Q520 50 522 50T528 55T534 64T540 82T547 110T558 153Q565 181 569 198Q602 330 602 331T457 332H312L279 197Q245 63 245 58Q245 51 253 49T303 46H334Q340 38 340 37T337 19Q333 6 327 0H312Q275 2 178 2Q144 2 115 2T69 2T48 1Q31 1 31 10Q31 12 34 24Q39 43 44 45Q48 46 59 46H65Q92 46 125 49Q139 52 144 61Q147 65 216 339T285 628Q285 635 228 637Z"></path><path id="MJMAIN-2223-07516fd6de2d11e5baf802f5dad986b7ed19ae74990446b490f42ba80d84ea77" stroke-width="0" d="M139 -249H137Q125 -249 119 -235V251L120 737Q130 750 139 750Q152 750 159 735V-235Q151 -249 141 -249H139Z"></path><path id="MJMATHI-45-07516fd6de2d11e5baf802f5dad986b7ed19ae74990446b490f42ba80d84ea77" stroke-width="0" d="M492 213Q472 213 472 226Q472 230 477 250T482 285Q482 316 461 323T364 330H312Q311 328 277 192T243 52Q243 48 254 48T334 46Q428 46 458 48T518 61Q567 77 599 117T670 248Q680 270 683 272Q690 274 698 274Q718 274 718 261Q613 7 608 2Q605 0 322 0H133Q31 0 31 11Q31 13 34 25Q38 41 42 43T65 46Q92 46 125 49Q139 52 144 61Q146 66 215 342T285 622Q285 629 281 629Q273 632 228 634H197Q191 640 191 642T193 659Q197 676 203 680H757Q764 676 764 669Q764 664 751 557T737 447Q735 440 717 440H705Q698 445 698 453L701 476Q704 500 704 528Q704 558 697 578T678 609T643 625T596 632T532 634H485Q397 633 392 631Q388 629 386 622Q385 619 355 499T324 377Q347 376 372 376H398Q464 376 489 391T534 472Q538 488 540 490T557 493Q562 493 565 493T570 492T572 491T574 487T577 483L544 351Q511 218 508 216Q505 213 492 213Z"></path><path id="MJMAIN-29-07516fd6de2d11e5baf802f5dad986b7ed19ae74990446b490f42ba80d84ea77" stroke-width="0" d="M60 749L64 750Q69 750 74 750H86L114 726Q208 641 251 514T294 250Q294 182 284 119T261 12T224 -76T186 -143T145 -194T113 -227T90 -246Q87 -249 86 -250H74Q66 -250 63 -250T58 -247T55 -238Q56 -237 66 -225Q221 -64 221 250T66 725Q56 737 55 738Q55 746 60 749Z"></path></defs><g stroke="black" fill="black" stroke-width="0" transform="matrix(1 0 0 -1 0 0)"><use xlink:href="#MJMATHI-50-07516fd6de2d11e5baf802f5dad986b7ed19ae74990446b490f42ba80d84ea77"></use><use xlink:href="#MJMAIN-28-07516fd6de2d11e5baf802f5dad986b7ed19ae74990446b490f42ba80d84ea77" x="751" y="0"></use><use xlink:href="#MJMATHI-48-07516fd6de2d11e5baf802f5dad986b7ed19ae74990446b490f42ba80d84ea77" x="1140" y="0"></use><use xlink:href="#MJMAIN-2223-07516fd6de2d11e5baf802f5dad986b7ed19ae74990446b490f42ba80d84ea77" x="2305" y="0"></use><use xlink:href="#MJMATHI-45-07516fd6de2d11e5baf802f5dad986b7ed19ae74990446b490f42ba80d84ea77" x="2861" y="0"></use><use xlink:href="#MJMAIN-29-07516fd6de2d11e5baf802f5dad986b7ed19ae74990446b490f42ba80d84ea77" x="3625" y="0"></use></g></svg></span> is</p>
+
+<p><span class="latexprocessor-block latexprocessor-b3e251acb15d496cc8e76e591bbccff6dbda859920455fff4fe86a7485d42312" title="LaTeX: \[P(H \mid E) =  \frac{P(E \mid H)} {P(E)} P(H).\]"><svg xmlns:xlink="http://www.w3.org/1999/xlink" style="width: 29.25ex; height: 5.75ex; vertical-align: -2.375ex; margin-top: 1px; margin-right: 0px; margin-bottom: 1px; margin-left: 0px; " viewBox="0 -1493.1288372916058 12584.333333333332 2486.2576745832116"><defs><path id="MJMATHI-50-7d504318defc11e5baf802f5dad986b7a6297ed2f7a144059a80dc21c5e16ad3" stroke-width="0" d="M287 628Q287 635 230 637Q206 637 199 638T192 648Q192 649 194 659Q200 679 203 681T397 683Q587 682 600 680Q664 669 707 631T751 530Q751 453 685 389Q616 321 507 303Q500 302 402 301H307L277 182Q247 66 247 59Q247 55 248 54T255 50T272 48T305 46H336Q342 37 342 35Q342 19 335 5Q330 0 319 0Q316 0 282 1T182 2Q120 2 87 2T51 1Q33 1 33 11Q33 13 36 25Q40 41 44 43T67 46Q94 46 127 49Q141 52 146 61Q149 65 218 339T287 628ZM645 554Q645 567 643 575T634 597T609 619T560 635Q553 636 480 637Q463 637 445 637T416 636T404 636Q391 635 386 627Q384 621 367 550T332 412T314 344Q314 342 395 342H407H430Q542 342 590 392Q617 419 631 471T645 554Z"></path><path id="MJMAIN-28-7d504318defc11e5baf802f5dad986b7a6297ed2f7a144059a80dc21c5e16ad3" stroke-width="0" d="M94 250Q94 319 104 381T127 488T164 576T202 643T244 695T277 729T302 750H315H319Q333 750 333 741Q333 738 316 720T275 667T226 581T184 443T167 250T184 58T225 -81T274 -167T316 -220T333 -241Q333 -250 318 -250H315H302L274 -226Q180 -141 137 -14T94 250Z"></path><path id="MJMATHI-48-7d504318defc11e5baf802f5dad986b7a6297ed2f7a144059a80dc21c5e16ad3" stroke-width="0" d="M228 637Q194 637 192 641Q191 643 191 649Q191 673 202 682Q204 683 219 683Q260 681 355 681Q389 681 418 681T463 682T483 682Q499 682 499 672Q499 670 497 658Q492 641 487 638H485Q483 638 480 638T473 638T464 637T455 637Q416 636 405 634T387 623Q384 619 355 500Q348 474 340 442T328 395L324 380Q324 378 469 378H614L615 381Q615 384 646 504Q674 619 674 627T617 637Q594 637 587 639T580 648Q580 650 582 660Q586 677 588 679T604 682Q609 682 646 681T740 680Q802 680 835 681T871 682Q888 682 888 672Q888 645 876 638H874Q872 638 869 638T862 638T853 637T844 637Q805 636 794 634T776 623Q773 618 704 340T634 58Q634 51 638 51Q646 48 692 46H723Q729 38 729 37T726 19Q722 6 716 0H701Q664 2 567 2Q533 2 504 2T458 2T437 1Q420 1 420 10Q420 15 423 24Q428 43 433 45Q437 46 448 46H454Q481 46 514 49Q520 50 522 50T528 55T534 64T540 82T547 110T558 153Q565 181 569 198Q602 330 602 331T457 332H312L279 197Q245 63 245 58Q245 51 253 49T303 46H334Q340 38 340 37T337 19Q333 6 327 0H312Q275 2 178 2Q144 2 115 2T69 2T48 1Q31 1 31 10Q31 12 34 24Q39 43 44 45Q48 46 59 46H65Q92 46 125 49Q139 52 144 61Q147 65 216 339T285 628Q285 635 228 637Z"></path><path id="MJMAIN-2223-7d504318defc11e5baf802f5dad986b7a6297ed2f7a144059a80dc21c5e16ad3" stroke-width="0" d="M139 -249H137Q125 -249 119 -235V251L120 737Q130 750 139 750Q152 750 159 735V-235Q151 -249 141 -249H139Z"></path><path id="MJMATHI-45-7d504318defc11e5baf802f5dad986b7a6297ed2f7a144059a80dc21c5e16ad3" stroke-width="0" d="M492 213Q472 213 472 226Q472 230 477 250T482 285Q482 316 461 323T364 330H312Q311 328 277 192T243 52Q243 48 254 48T334 46Q428 46 458 48T518 61Q567 77 599 117T670 248Q680 270 683 272Q690 274 698 274Q718 274 718 261Q613 7 608 2Q605 0 322 0H133Q31 0 31 11Q31 13 34 25Q38 41 42 43T65 46Q92 46 125 49Q139 52 144 61Q146 66 215 342T285 622Q285 629 281 629Q273 632 228 634H197Q191 640 191 642T193 659Q197 676 203 680H757Q764 676 764 669Q764 664 751 557T737 447Q735 440 717 440H705Q698 445 698 453L701 476Q704 500 704 528Q704 558 697 578T678 609T643 625T596 632T532 634H485Q397 633 392 631Q388 629 386 622Q385 619 355 499T324 377Q347 376 372 376H398Q464 376 489 391T534 472Q538 488 540 490T557 493Q562 493 565 493T570 492T572 491T574 487T577 483L544 351Q511 218 508 216Q505 213 492 213Z"></path><path id="MJMAIN-29-7d504318defc11e5baf802f5dad986b7a6297ed2f7a144059a80dc21c5e16ad3" stroke-width="0" d="M60 749L64 750Q69 750 74 750H86L114 726Q208 641 251 514T294 250Q294 182 284 119T261 12T224 -76T186 -143T145 -194T113 -227T90 -246Q87 -249 86 -250H74Q66 -250 63 -250T58 -247T55 -238Q56 -237 66 -225Q221 -64 221 250T66 725Q56 737 55 738Q55 746 60 749Z"></path><path id="MJMAIN-3D-7d504318defc11e5baf802f5dad986b7a6297ed2f7a144059a80dc21c5e16ad3" stroke-width="0" d="M56 347Q56 360 70 367H707Q722 359 722 347Q722 336 708 328L390 327H72Q56 332 56 347ZM56 153Q56 168 72 173H708Q722 163 722 153Q722 140 707 133H70Q56 140 56 153Z"></path><path id="MJMATHI-50-7d504318defc11e5baf802f5dad986b7a6297ed2f7a144059a80dc21c5e16ad3" stroke-width="0" d="M287 628Q287 635 230 637Q206 637 199 638T192 648Q192 649 194 659Q200 679 203 681T397 683Q587 682 600 680Q664 669 707 631T751 530Q751 453 685 389Q616 321 507 303Q500 302 402 301H307L277 182Q247 66 247 59Q247 55 248 54T255 50T272 48T305 46H336Q342 37 342 35Q342 19 335 5Q330 0 319 0Q316 0 282 1T182 2Q120 2 87 2T51 1Q33 1 33 11Q33 13 36 25Q40 41 44 43T67 46Q94 46 127 49Q141 52 146 61Q149 65 218 339T287 628ZM645 554Q645 567 643 575T634 597T609 619T560 635Q553 636 480 637Q463 637 445 637T416 636T404 636Q391 635 386 627Q384 621 367 550T332 412T314 344Q314 342 395 342H407H430Q542 342 590 392Q617 419 631 471T645 554Z"></path><path id="MJMAIN-28-7d504318defc11e5baf802f5dad986b7a6297ed2f7a144059a80dc21c5e16ad3" stroke-width="0" d="M94 250Q94 319 104 381T127 488T164 576T202 643T244 695T277 729T302 750H315H319Q333 750 333 741Q333 738 316 720T275 667T226 581T184 443T167 250T184 58T225 -81T274 -167T316 -220T333 -241Q333 -250 318 -250H315H302L274 -226Q180 -141 137 -14T94 250Z"></path><path id="MJMATHI-45-7d504318defc11e5baf802f5dad986b7a6297ed2f7a144059a80dc21c5e16ad3" stroke-width="0" d="M492 213Q472 213 472 226Q472 230 477 250T482 285Q482 316 461 323T364 330H312Q311 328 277 192T243 52Q243 48 254 48T334 46Q428 46 458 48T518 61Q567 77 599 117T670 248Q680 270 683 272Q690 274 698 274Q718 274 718 261Q613 7 608 2Q605 0 322 0H133Q31 0 31 11Q31 13 34 25Q38 41 42 43T65 46Q92 46 125 49Q139 52 144 61Q146 66 215 342T285 622Q285 629 281 629Q273 632 228 634H197Q191 640 191 642T193 659Q197 676 203 680H757Q764 676 764 669Q764 664 751 557T737 447Q735 440 717 440H705Q698 445 698 453L701 476Q704 500 704 528Q704 558 697 578T678 609T643 625T596 632T532 634H485Q397 633 392 631Q388 629 386 622Q385 619 355 499T324 377Q347 376 372 376H398Q464 376 489 391T534 472Q538 488 540 490T557 493Q562 493 565 493T570 492T572 491T574 487T577 483L544 351Q511 218 508 216Q505 213 492 213Z"></path><path id="MJMAIN-2223-7d504318defc11e5baf802f5dad986b7a6297ed2f7a144059a80dc21c5e16ad3" stroke-width="0" d="M139 -249H137Q125 -249 119 -235V251L120 737Q130 750 139 750Q152 750 159 735V-235Q151 -249 141 -249H139Z"></path><path id="MJMATHI-48-7d504318defc11e5baf802f5dad986b7a6297ed2f7a144059a80dc21c5e16ad3" stroke-width="0" d="M228 637Q194 637 192 641Q191 643 191 649Q191 673 202 682Q204 683 219 683Q260 681 355 681Q389 681 418 681T463 682T483 682Q499 682 499 672Q499 670 497 658Q492 641 487 638H485Q483 638 480 638T473 638T464 637T455 637Q416 636 405 634T387 623Q384 619 355 500Q348 474 340 442T328 395L324 380Q324 378 469 378H614L615 381Q615 384 646 504Q674 619 674 627T617 637Q594 637 587 639T580 648Q580 650 582 660Q586 677 588 679T604 682Q609 682 646 681T740 680Q802 680 835 681T871 682Q888 682 888 672Q888 645 876 638H874Q872 638 869 638T862 638T853 637T844 637Q805 636 794 634T776 623Q773 618 704 340T634 58Q634 51 638 51Q646 48 692 46H723Q729 38 729 37T726 19Q722 6 716 0H701Q664 2 567 2Q533 2 504 2T458 2T437 1Q420 1 420 10Q420 15 423 24Q428 43 433 45Q437 46 448 46H454Q481 46 514 49Q520 50 522 50T528 55T534 64T540 82T547 110T558 153Q565 181 569 198Q602 330 602 331T457 332H312L279 197Q245 63 245 58Q245 51 253 49T303 46H334Q340 38 340 37T337 19Q333 6 327 0H312Q275 2 178 2Q144 2 115 2T69 2T48 1Q31 1 31 10Q31 12 34 24Q39 43 44 45Q48 46 59 46H65Q92 46 125 49Q139 52 144 61Q147 65 216 339T285 628Q285 635 228 637Z"></path><path id="MJMAIN-29-7d504318defc11e5baf802f5dad986b7a6297ed2f7a144059a80dc21c5e16ad3" stroke-width="0" d="M60 749L64 750Q69 750 74 750H86L114 726Q208 641 251 514T294 250Q294 182 284 119T261 12T224 -76T186 -143T145 -194T113 -227T90 -246Q87 -249 86 -250H74Q66 -250 63 -250T58 -247T55 -238Q56 -237 66 -225Q221 -64 221 250T66 725Q56 737 55 738Q55 746 60 749Z"></path><path id="MJMATHI-50-7d504318defc11e5baf802f5dad986b7a6297ed2f7a144059a80dc21c5e16ad3" stroke-width="0" d="M287 628Q287 635 230 637Q206 637 199 638T192 648Q192 649 194 659Q200 679 203 681T397 683Q587 682 600 680Q664 669 707 631T751 530Q751 453 685 389Q616 321 507 303Q500 302 402 301H307L277 182Q247 66 247 59Q247 55 248 54T255 50T272 48T305 46H336Q342 37 342 35Q342 19 335 5Q330 0 319 0Q316 0 282 1T182 2Q120 2 87 2T51 1Q33 1 33 11Q33 13 36 25Q40 41 44 43T67 46Q94 46 127 49Q141 52 146 61Q149 65 218 339T287 628ZM645 554Q645 567 643 575T634 597T609 619T560 635Q553 636 480 637Q463 637 445 637T416 636T404 636Q391 635 386 627Q384 621 367 550T332 412T314 344Q314 342 395 342H407H430Q542 342 590 392Q617 419 631 471T645 554Z"></path><path id="MJMAIN-28-7d504318defc11e5baf802f5dad986b7a6297ed2f7a144059a80dc21c5e16ad3" stroke-width="0" d="M94 250Q94 319 104 381T127 488T164 576T202 643T244 695T277 729T302 750H315H319Q333 750 333 741Q333 738 316 720T275 667T226 581T184 443T167 250T184 58T225 -81T274 -167T316 -220T333 -241Q333 -250 318 -250H315H302L274 -226Q180 -141 137 -14T94 250Z"></path><path id="MJMATHI-45-7d504318defc11e5baf802f5dad986b7a6297ed2f7a144059a80dc21c5e16ad3" stroke-width="0" d="M492 213Q472 213 472 226Q472 230 477 250T482 285Q482 316 461 323T364 330H312Q311 328 277 192T243 52Q243 48 254 48T334 46Q428 46 458 48T518 61Q567 77 599 117T670 248Q680 270 683 272Q690 274 698 274Q718 274 718 261Q613 7 608 2Q605 0 322 0H133Q31 0 31 11Q31 13 34 25Q38 41 42 43T65 46Q92 46 125 49Q139 52 144 61Q146 66 215 342T285 622Q285 629 281 629Q273 632 228 634H197Q191 640 191 642T193 659Q197 676 203 680H757Q764 676 764 669Q764 664 751 557T737 447Q735 440 717 440H705Q698 445 698 453L701 476Q704 500 704 528Q704 558 697 578T678 609T643 625T596 632T532 634H485Q397 633 392 631Q388 629 386 622Q385 619 355 499T324 377Q347 376 372 376H398Q464 376 489 391T534 472Q538 488 540 490T557 493Q562 493 565 493T570 492T572 491T574 487T577 483L544 351Q511 218 508 216Q505 213 492 213Z"></path><path id="MJMAIN-29-7d504318defc11e5baf802f5dad986b7a6297ed2f7a144059a80dc21c5e16ad3" stroke-width="0" d="M60 749L64 750Q69 750 74 750H86L114 726Q208 641 251 514T294 250Q294 182 284 119T261 12T224 -76T186 -143T145 -194T113 -227T90 -246Q87 -249 86 -250H74Q66 -250 63 -250T58 -247T55 -238Q56 -237 66 -225Q221 -64 221 250T66 725Q56 737 55 738Q55 746 60 749Z"></path><path id="MJMATHI-50-7d504318defc11e5baf802f5dad986b7a6297ed2f7a144059a80dc21c5e16ad3" stroke-width="0" d="M287 628Q287 635 230 637Q206 637 199 638T192 648Q192 649 194 659Q200 679 203 681T397 683Q587 682 600 680Q664 669 707 631T751 530Q751 453 685 389Q616 321 507 303Q500 302 402 301H307L277 182Q247 66 247 59Q247 55 248 54T255 50T272 48T305 46H336Q342 37 342 35Q342 19 335 5Q330 0 319 0Q316 0 282 1T182 2Q120 2 87 2T51 1Q33 1 33 11Q33 13 36 25Q40 41 44 43T67 46Q94 46 127 49Q141 52 146 61Q149 65 218 339T287 628ZM645 554Q645 567 643 575T634 597T609 619T560 635Q553 636 480 637Q463 637 445 637T416 636T404 636Q391 635 386 627Q384 621 367 550T332 412T314 344Q314 342 395 342H407H430Q542 342 590 392Q617 419 631 471T645 554Z"></path><path id="MJMAIN-28-7d504318defc11e5baf802f5dad986b7a6297ed2f7a144059a80dc21c5e16ad3" stroke-width="0" d="M94 250Q94 319 104 381T127 488T164 576T202 643T244 695T277 729T302 750H315H319Q333 750 333 741Q333 738 316 720T275 667T226 581T184 443T167 250T184 58T225 -81T274 -167T316 -220T333 -241Q333 -250 318 -250H315H302L274 -226Q180 -141 137 -14T94 250Z"></path><path id="MJMATHI-48-7d504318defc11e5baf802f5dad986b7a6297ed2f7a144059a80dc21c5e16ad3" stroke-width="0" d="M228 637Q194 637 192 641Q191 643 191 649Q191 673 202 682Q204 683 219 683Q260 681 355 681Q389 681 418 681T463 682T483 682Q499 682 499 672Q499 670 497 658Q492 641 487 638H485Q483 638 480 638T473 638T464 637T455 637Q416 636 405 634T387 623Q384 619 355 500Q348 474 340 442T328 395L324 380Q324 378 469 378H614L615 381Q615 384 646 504Q674 619 674 627T617 637Q594 637 587 639T580 648Q580 650 582 660Q586 677 588 679T604 682Q609 682 646 681T740 680Q802 680 835 681T871 682Q888 682 888 672Q888 645 876 638H874Q872 638 869 638T862 638T853 637T844 637Q805 636 794 634T776 623Q773 618 704 340T634 58Q634 51 638 51Q646 48 692 46H723Q729 38 729 37T726 19Q722 6 716 0H701Q664 2 567 2Q533 2 504 2T458 2T437 1Q420 1 420 10Q420 15 423 24Q428 43 433 45Q437 46 448 46H454Q481 46 514 49Q520 50 522 50T528 55T534 64T540 82T547 110T558 153Q565 181 569 198Q602 330 602 331T457 332H312L279 197Q245 63 245 58Q245 51 253 49T303 46H334Q340 38 340 37T337 19Q333 6 327 0H312Q275 2 178 2Q144 2 115 2T69 2T48 1Q31 1 31 10Q31 12 34 24Q39 43 44 45Q48 46 59 46H65Q92 46 125 49Q139 52 144 61Q147 65 216 339T285 628Q285 635 228 637Z"></path><path id="MJMAIN-29-7d504318defc11e5baf802f5dad986b7a6297ed2f7a144059a80dc21c5e16ad3" stroke-width="0" d="M60 749L64 750Q69 750 74 750H86L114 726Q208 641 251 514T294 250Q294 182 284 119T261 12T224 -76T186 -143T145 -194T113 -227T90 -246Q87 -249 86 -250H74Q66 -250 63 -250T58 -247T55 -238Q56 -237 66 -225Q221 -64 221 250T66 725Q56 737 55 738Q55 746 60 749Z"></path><path id="MJMAIN-2E-7d504318defc11e5baf802f5dad986b7a6297ed2f7a144059a80dc21c5e16ad3" stroke-width="0" d="M78 60Q78 84 95 102T138 120Q162 120 180 104T199 61Q199 36 182 18T139 0T96 17T78 60Z"></path></defs><g stroke="black" fill="black" stroke-width="0" transform="matrix(1 0 0 -1 0 0)"><use xlink:href="#MJMATHI-50-7d504318defc11e5baf802f5dad986b7a6297ed2f7a144059a80dc21c5e16ad3"></use><use xlink:href="#MJMAIN-28-7d504318defc11e5baf802f5dad986b7a6297ed2f7a144059a80dc21c5e16ad3" x="751" y="0"></use><use xlink:href="#MJMATHI-48-7d504318defc11e5baf802f5dad986b7a6297ed2f7a144059a80dc21c5e16ad3" x="1140" y="0"></use><use xlink:href="#MJMAIN-2223-7d504318defc11e5baf802f5dad986b7a6297ed2f7a144059a80dc21c5e16ad3" x="2305" y="0"></use><use xlink:href="#MJMATHI-45-7d504318defc11e5baf802f5dad986b7a6297ed2f7a144059a80dc21c5e16ad3" x="2861" y="0"></use><use xlink:href="#MJMAIN-29-7d504318defc11e5baf802f5dad986b7a6297ed2f7a144059a80dc21c5e16ad3" x="3625" y="0"></use><use xlink:href="#MJMAIN-3D-7d504318defc11e5baf802f5dad986b7a6297ed2f7a144059a80dc21c5e16ad3" x="4292" y="0"></use><g transform="translate(5468,0)"><rect stroke="none" width="4134" height="60" x="0" y="220"></rect><g transform="translate(60,724)"><use xlink:href="#MJMATHI-50-7d504318defc11e5baf802f5dad986b7a6297ed2f7a144059a80dc21c5e16ad3"></use><use xlink:href="#MJMAIN-28-7d504318defc11e5baf802f5dad986b7a6297ed2f7a144059a80dc21c5e16ad3" x="751" y="0"></use><use xlink:href="#MJMATHI-45-7d504318defc11e5baf802f5dad986b7a6297ed2f7a144059a80dc21c5e16ad3" x="1140" y="0"></use><use xlink:href="#MJMAIN-2223-7d504318defc11e5baf802f5dad986b7a6297ed2f7a144059a80dc21c5e16ad3" x="2181" y="0"></use><use xlink:href="#MJMATHI-48-7d504318defc11e5baf802f5dad986b7a6297ed2f7a144059a80dc21c5e16ad3" x="2737" y="0"></use><use xlink:href="#MJMAIN-29-7d504318defc11e5baf802f5dad986b7a6297ed2f7a144059a80dc21c5e16ad3" x="3625" y="0"></use></g><g transform="translate(920,-725)"><use xlink:href="#MJMATHI-50-7d504318defc11e5baf802f5dad986b7a6297ed2f7a144059a80dc21c5e16ad3"></use><use xlink:href="#MJMAIN-28-7d504318defc11e5baf802f5dad986b7a6297ed2f7a144059a80dc21c5e16ad3" x="751" y="0"></use><use xlink:href="#MJMATHI-45-7d504318defc11e5baf802f5dad986b7a6297ed2f7a144059a80dc21c5e16ad3" x="1140" y="0"></use><use xlink:href="#MJMAIN-29-7d504318defc11e5baf802f5dad986b7a6297ed2f7a144059a80dc21c5e16ad3" x="1904" y="0"></use></g></g><use xlink:href="#MJMATHI-50-7d504318defc11e5baf802f5dad986b7a6297ed2f7a144059a80dc21c5e16ad3" x="9889" y="0"></use><use xlink:href="#MJMAIN-28-7d504318defc11e5baf802f5dad986b7a6297ed2f7a144059a80dc21c5e16ad3" x="10640" y="0"></use><use xlink:href="#MJMATHI-48-7d504318defc11e5baf802f5dad986b7a6297ed2f7a144059a80dc21c5e16ad3" x="11029" y="0"></use><use xlink:href="#MJMAIN-29-7d504318defc11e5baf802f5dad986b7a6297ed2f7a144059a80dc21c5e16ad3" x="11917" y="0"></use><use xlink:href="#MJMAIN-2E-7d504318defc11e5baf802f5dad986b7a6297ed2f7a144059a80dc21c5e16ad3" x="12306" y="0"></use></g></svg></span></p>
+
+<p>Many modern <a href="#" class="wiki_link" title="machine learning"  >machine learning</a> techniques rely on Bayes' theorem. For instance, spam filters use Bayesian updating to determine whether an email is real or spam, given the words in the email. Additionally, many specific techniques in statistics, such as <a href="#" class="wiki_link" title="interpreting medical results"  >interpreting medical results</a>, are best described in terms of how they contribute to updating hypotheses using Bayes' theorem.</p>
+
+</div>
+
               </p>
 
-              <h5 id="lorem2">Lorem ipsum dolor sit amet</h5>
-              <p>
-               aliqua tempor cupidatat aute dolore deserunt ipsum qui incididunt aliqua occaecat sit quis. Culpa sint aliqua aliqua reprehenderit veniam irure fugiat ea ad.
-              </p>
-              <p>
-                Non dolore sit nostrud eu ad excepteur cillum eu ex Lorem duis.
-              </p>
-              <p>
-                veniam ad ipsum eu. Ipsum culpa dolore sunt officia laborum quis.
-              </p>
 
-              <h5 id="lorem3">Lorem ipsum dolor sit amet</h5>
+              <h5 id="lorem2">Relation to our problem defination</h5>
+              <p>To demonstrate the concept of Naïve Bayes Classification, consider the example of our dataset , the objects can be classified as either bought or not bought i.e. Yes or No . Our task is to classify new cases as they arrive, i.e., decide to which class label they belong, based on the currently exiting objects.</p>
+              <p>Firstly how manny cases are of Yes class and how many are of No class are calculated ,more no. of class cases suggest more probalility. In the Bayesian analysis, this belief is known as the prior probability. Prior probabilities are based on previous experience , often used to predict outcomes before they actually happen.</p>
+              <p>Having formulated our prior probability, we are now ready to classify a new object. Since the objects are well clustered, it is reasonable to assume that the class which has objects in the vicinity of X, is more likely that the new cases belong to that particular class. To measure this likelihood, we draw a circle around X which encompasses a number (to be chosen a priori) of points irrespective of their class labels. Then we calculate the number of points in the circle belonging to each class label. Then we find probability wrt to total points.</p>
+              <p>Although the prior probabilities indicate that X may belong to some class the likelihood can indicate otherwise . In the Bayesian analysis, the final classification is produced by combining both sources of information, i.e., the prior and the likelihood, to form a posterior probability using the so-called Bayes' rule.</p>
 
-              <p id="lorem4">
-                 sint elit aliqua anim dolore cupidatat fugiat aliquip qui.
-              </p>
-              <p id="lorem5">
-                ex cupidatat cupidatat nostrud nostrud ipsum.
-              </p>
-              <p>
-                 enim labore reprehenderit officia mollit.
-              </p>
-              <p>
-                 Aliquip mollit laboris ad labore anim.
-              </p>
+              <h5 id="lorem3">Confusion Matrix</h5>
+              <div>
+                <img  src="static/images/matrix_naive_bayes.png" style="" alt="Confusion Matrix">
+              </div>
+
+              <h5 id="lorem4">Graph for Testing Dataset</h5>
+              <div>
+                <img src="static/images/naive_bayes.png" style="" alt="Confusion Matrix">
+              </div>
+
             </div>
           </section>
         </div>
+
+
+<!-- feature2 -->
+        <div class="mdl-layout__tab-panel" id="features2">
+          <section class="section--center mdl-grid mdl-grid--no-spacing">
+            <div class="mdl-cell mdl-cell--12-col">
+              <h4>Random forest algorithm</h4>
+              <p>
+                Random forest algorithm is a supervised classification algorithm. As the name suggest, this algorithm creates the forest with a number of trees.
+                In general, the more trees in the forest the more robust the forest looks like. In the same way in the random forest classifier, the higher the number of trees in the forest gives the high accuracy results.
+              </p>
+              <ul class="toc">
+                <h4>Contents</h4>
+                <a href="#lorem5">Random forest concept</a>
+                <a href="#lorem6">Random forest prediction pseudocode</a>
+                <a href="#lorem7">Confusion Matrix</a>
+                <a href="#lorem8">Graph for Testing Dataset</a>
+              </ul>
+
+              <h5 id="lorem5">Random forest concept</h5>
+              <p>
+                The pseudocode for random forest algorithm can split into two stages.Random forest creation pseudocode. Pseudocode to perform prediction from the created random forest classifier. </p>
+              <p>First, let’s begin with random forest algo:</p>
+                <ul>
+                  <li>Randomly select “k” features from total “m” features. Where k << m</li>
+                  <li>Among the “k” features, calculate the node “d” using the best split point.</li>
+                  <li>Split the node into child nodes using the best split.</li>
+                  <li>Repeat 1 to 3 steps until “l” number of nodes has been reached.</li>
+                  <li>Build forest by repeating steps 1 to 4 for “n” number times to create “n” number of trees.</li>
+                </ul>
+                <p>
+                  The beginning of random forest algorithm starts with randomly selecting “k” features out of total “m” features. In the image, you can observe that we are randomly taking features and observations.In the next stage, we are using the randomly selected “k” features to find the root node by using the best split approach.The next stage, We will be calculating the child nodes using the same best split approach. Will the first 3 stages until we form the tree with a root node and having the target as the leaf node.Finally, we repeat 1 to 4 stages to create “n” randomly created trees. This randomly created trees forms the random forest.
+              </p>
+
+
+              <h5 id="lorem6">Random forest prediction pseudocode</h5>
+              <p>
+               To perform prediction using the trained random forest algorithm
+              </p>
+              <ul>
+                <li>Takes the test features and use the rules of each randomly created decision tree to predict the oucome and stores the predicted outcome (target)</li>
+                <li>Calculate the votes for each predicted target.</li>
+                <li>Consider the high voted predicted target as the final prediction from the random forest algorithm.</li>
+              </ul>
+
+              <h5 id="lorem7">Confusion Matrix</h5>
+              <div>
+                <img src="static/images/matrix_random_forest.png" style="" alt="Confusion Matrix">
+              </div>
+
+              <h5 id="lorem8">Graph for Testing Dataset</h5>
+              <div>
+                <img src="static/images/random_forest.png" style="" alt="Confusion Matrix">
+              </div>
+
+            </div>
+          </section>
+        </div>
+
+
+
+<!-- feature3 -->
+
+        <div class="mdl-layout__tab-panel" id="features3">
+          <section class="section--center mdl-grid mdl-grid--no-spacing">
+            <div class="mdl-cell mdl-cell--12-col">
+              <h4>k Nearest Neighbors</h4>
+              <p>
+
+              </p>
+              <ul class="toc">
+                <h4>Contents</h4>
+                <a href="#lorem9">k Nearest Neighbors</a>
+                <a href="#lorem10">Relation to our problem defination</a>
+                <a href="#lorem11">Confusion Matrix</a>
+                <a href="#lorem12">Graph for Testing Dataset</a>
+              </ul>
+
+              <h5 id="lorem9">k Nearest Neighbors</h5>
+              <p>
+                When this algorithm is faced by a test sample, it plots that sample in the same n-dimensional space as the training data and then searches for its k nearest neighbors based on any of these distance measures from the training samples. Yes, it goes through the complete training data every time it needs to predict a test sample’s classification label! This is why it’s called a Lazy learning technique
+              </p>
+              <p>
+                For small values of k, the classification becomes locally sensitive, i.e., training samples similar to the test sample heavily dominate its classification. The decision boundary, or rather decision surface becomes quite jittery.
+              </p>
+              <p>
+                For large values of k, the local sensitivity of the classification decreases, i.e., training samples less-like the test sample also affect its classification. The decision surface becomes smoother.
+              </p>
+
+
+              <h5 id="lorem10">Relation to practical problem defination</h5>
+              <p>
+               This is a straightforward extension of 1NN. Basically what we do is that we try to find the k nearest neighbor and do a majority voting. Typically k is odd when the number of classes is 2. Lets say k = 5 and there are 3 instances of C1 and 2 instances of C2. In this case , KNN says that new point has to labeled as C1 as it forms the majority. We follow a similar argument when there are multiple classes.
+             </p>
+            <p>
+              One of the straight forward extension is not to give 1 vote to all the neighbors. A very common thing to do is weighted kNN where each point has a weight which is typically calculated using its distance. For eg under inverse distance weighting, each point has a weight equal to the inverse of its distance to the point to be classified. This means that neighboring points have a higher vote than the farther points.
+            </p>
+            <p>
+              It is quite obvious that the accuracy *might* increase when you increase k but the computation cost also increases.
+            </p>
+
+
+              <h5 id="lorem11">Confusion Matrix</h5>
+              <div>
+                <img src="static/images/matrix_knn.png" style="" alt="Confusion Matrix">
+              </div>
+
+              <h5 id="lorem12">Graph for Testing Dataset</h5>
+              <div>
+                <img src="static/images/knn.png" style="" alt="Confusion Matrix">
+              </div>
+
+            </div>
+          </section>
+        </div>
+
+
+
+
+<!-- feature4 -->
+
+
+        <div class="mdl-layout__tab-panel" id="features4">
+          <section class="section--center mdl-grid mdl-grid--no-spacing">
+            <div class="mdl-cell mdl-cell--12-col">
+              <h4>Decision Tree Algorithm</h4>
+              <p>
+              Decision Tree algorithm belongs to the family of supervised learning algorithms. Unlike other supervised learning algorithms, decision tree algorithm can be used for solving regression and classification problems too.
+              The general motive of using Decision Tree is to create a training model which can use to predict class or value of target variables by learning decision rules inferred from prior data(training data).
+              The understanding level of Decision Trees algorithm is so easy compared with other classification algorithms. The decision tree algorithm tries to solve the problem, by using tree representation. Each internal node of the tree corresponds to an attribute, and each leaf node corresponds to a class label.
+              </p>
+              <ul class="toc">
+                <h4>Contents</h4>
+                <a href="#lorem13">Decision Tree Algorithm Pseudocode</a>
+                <a href="#lorem14">Relation to our problem defination</a>
+                <a href="#lorem15">Confusion Matrix</a>
+                <a href="#lorem16">Graph for Testing Dataset</a>
+              </ul>
+
+              <h5 id="lorem13">Decision Tree Algorithm Pseudocode</h5>
+              <p>
+                <ul>
+                  <li>Place the best attribute of the dataset at the root of the tree.</li>
+                  <li>Split the training set into subsets. Subsets should be made in such a way that each subset contains data with the same value for an attribute.
+                  </li>
+                  <li>Repeat step 1 and step 2 on each subset until you find leaf nodes in all the branches of the tree.</li>
+                </ul>
+              </p>
+
+
+              <h5 id="lorem14">Relation to our problem defination</h5>
+              <p>
+               For our problem defination, we have age,gender,EstimatedSalary attributes.
+               Firstly attribute is selected based on maximum information gain of attribute
+               Dataset is now devided base on different values of the selected attribute .
+               again same procedure is followed to find secondary attribute.Util we get leaf node in our decision tree.
+              </p>
+
+              <h5 id="lorem15">Confusion Matrix</h5>
+              <div>
+                <img src="static/images/matrix_decision_tree.png" style="" alt="Confusion Matrix">
+              </div>
+
+              <h5 id="lorem16">Graph for Testing Dataset</h5>
+              <div>
+                <img src="static/images/decision_tree.png" style="" alt="Confusion Matrix">
+              </div>
+
+            </div>
+          </section>
+        </div>
+
 
 
 
@@ -239,7 +403,7 @@
                 </tr>
                 <tr>
                   <th>Rahul Soni</th>
-                  <th>(1514---)</th>
+                  <th>(1514116)</th>
                 </tr>
                 <tr>
                   <th>Jigar Wala</th>

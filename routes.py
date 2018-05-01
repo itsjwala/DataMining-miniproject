@@ -10,56 +10,27 @@ def root():
     return app.send_static_file("index.html")
 
 
-@app.route('/randomForest', methods=['POST'])
-def random_forest():
-    if request.method == 'POST':
-        X_test_input = []
-        age = request.form['age']
-        X_test_input.append(age)
-        salary = request.form['salary']
-        X_test_input.append(salary)
-        data = dict()
+@app.route('/predict')
+def prediction():
+    X_test_input = []
+    age = request.values['age']
+    X_test_input.append(age)
+    salary = request.values['salary']
+    X_test_input.append(salary)
+    algo = request.values['algo']
+    data = dict()
+    if algo == 'randForest':
         data['prediction'] = randforest(X_test_input)
-        return jsonify(data)
-
-
-@app.route('/naiveBayes', methods=['POST'])
-def bayes():
-    if request.method == 'POST':
-        X_test_input = []
-        age = request.form['age']
-        X_test_input.append(age)
-        salary = request.form['salary']
-        X_test_input.append(salary)
-        data = dict()
+    elif algo == 'naiveBayes':
         data['prediction'] = naivebayes(X_test_input)
-        return jsonify(data)
-
-
-@app.route('/knn', methods=['POST'])
-def knn():
-    if request.method == 'POST':
-        X_test_input = []
-        age = request.form['age']
-        X_test_input.append(age)
-        salary = request.form['salary']
-        X_test_input.append(salary)
-        data = dict()
+    elif algo == 'knn':
         data['prediction'] = k_nearest_neighbours(X_test_input)
-        return jsonify(data)
-
-
-@app.route('/decisionTree', methods=['POST'])
-def decisionTree():
-    if request.method == 'POST':
-        X_test_input = []
-        age = request.form['age']
-        X_test_input.append(age)
-        salary = request.form['salary']
-        X_test_input.append(salary)
-        data = dict()
+    elif algo == 'decisionTree':
         data['prediction'] = decision_tree(X_test_input)
-        return jsonify(data)
+    else:
+        data['prediction'] = 'None'
+
+    return jsonify(data)
 
 
 if __name__ == '__main__':

@@ -72,7 +72,7 @@ pickle.dump(classifier, open("./pickles/random_forest.pickle", 'wb'))
 plot_confusion_matrix(cm=confusion_matrix(Y_test, classifier.predict(X_test)), filename="./static/images/matrix_random_forest.png")
 
 
-# print(cm)
+plt.clf()
 
 X_set, y_set = X_train, Y_train
 X1, X2 = np.meshgrid(np.arange(start=X_set[:, 0].min() - 1, stop=X_set[:, 0].max() + 1, step=0.01),
