@@ -4,15 +4,30 @@
 
 ## Description
 
-This is a webapp to predict customer ads pull, developed a part of course Data Mining.
+This is a webapp to predict customer ads pull, developed as a part of course Data Mining.
+
+The webapp predicts, if a customer would purchase the product with refernce to the advertisement, based on:
+
+- Gender
+- Age
+- Estimated Salary
+
+The predictor is based on the following algorithms:
+
+1. Random Forest
+2. Naive Bayes
+3. Decision Tree
+4. K-Nearest Neighbors
 
 ## Installation
 
 Clone the repository to install the source code.
 
 ```sh
+
 git clone https://github.com/jigarWala/DM-miniproject.git
 cd DM-miniproject
+
 ```
 
 Then, install the `requirements` via package manager `pip`.
@@ -23,7 +38,7 @@ pip install -r requirements.txt
 
 ```
 
-### Usage
+## Execution
 
 Run the Server
 
@@ -33,9 +48,9 @@ python3 routes.py
 
 ```
 
-Type `localhost:8080` in the browsers' address bar.
+Type `localhost:8000` in the browsers' address bar.
 
-### Contributers
+## Contributers
 
 <table>
     <td>
