@@ -66,8 +66,8 @@ Type `localhost:8000` in the browsers' address bar.
         </a>
     </td>
     <td>
-        <a href="https://github.com/raoniz">
-            <img src="https://github.com/raoniz.png" height=150px width=150px><br>
+        <a href="https://github.com/er-raoniz">
+            <img src="https://github.com/er-raoniz.png" height=150px width=150px><br>
             Rahul Soni
         </a>
     </td>
